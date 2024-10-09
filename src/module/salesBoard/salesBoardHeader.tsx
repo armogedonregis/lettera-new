@@ -99,7 +99,7 @@ export const SalesBoardHeader = () => {
     };
 
     return (
-        <div className={`sticky z-[60] px-5 lg:px-8 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md rounded-b-xl pt-6 top-12' : 'top-20'}`}>
+        <div className={`lg:sticky pt-10 lg:pt-0 z-[60] px-5 lg:px-8 transition-all duration-300 ${isScrolled ? 'lg:bg-white lg:shadow-md lg:rounded-b-xl lg:pt-6 lg:top-12' : 'lg:top-20'}`}>
             <div className="flex mb-4">
                 <div className="relative flex-grow">
                     <input type="text" placeholder="Поиск в Lettera" className="w-full p-2 pl-10 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />

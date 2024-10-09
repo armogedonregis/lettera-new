@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { HeartIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { useCart } from '@/context/cartContext';
+import { toast } from 'react-toastify';
 
 const paymentMethods = [
   { id: 'visa', name: 'Karta Visa', icon: '💳' },
@@ -19,11 +20,15 @@ export default function CartScreen() {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const handleQuantityChange = (id: number, newQuantity: number) => {
+    const item = cartItems.find(item => item.id === id);
+    if (!item) return;
+
     if (newQuantity > 0) {
       updateQuantity(id, newQuantity);
     } else {
       removeFromCart(id);
     }
+    toast.error(`"${item.name}" удален из корзины`);
   };
 
   return (

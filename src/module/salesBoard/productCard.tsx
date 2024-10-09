@@ -3,6 +3,7 @@ import { StarIcon } from '@heroicons/react/24/solid';
 import CartIcon from '/public/icons/cart_icon.svg';
 import HeartIcon from '/public/icons/heart_icon.svg';
 import { useCart } from '@/context/cartContext';
+import { toast } from 'react-toastify';
 
 interface ProductCardProps {
   product: {
@@ -18,6 +19,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const handleAddToCart = () => {
     addToCart(product);
+    toast.success(`"${product.name}" добавлен в корзину`);
   };
 
   return (

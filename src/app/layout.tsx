@@ -5,7 +5,9 @@ import Header from "@/components/header";
 import LoaderWrapper from "@/components/loader/loaderWrapper";
 import CustomScrollbar from "@/components/customScrollbar";
 import { CartWrapper } from "@/context";
-
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+  
 const workSans = Work_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '700'],
@@ -44,6 +46,7 @@ export default function RootLayout({
               </div>
             </CustomScrollbar>
           </main>
+          <ToastContainer position="top-right" autoClose={3000} />
         </LoaderWrapper>
       </CartWrapper>
       </body>
