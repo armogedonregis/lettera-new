@@ -28,7 +28,7 @@ const Header: React.FC = () => {
 
 
     return (
-        <header className="bg-white shadow-md sticky top-0 left-0 right-0 z-50 overflow-hidden">
+        <header className="bg-white shadow-md fixed top-0 left-0 right-0 z-50 overflow-hidden">
             <div className="container px-5 lg:px-0 py-4 flex justify-between items-center">
                 <div className="flex items-center">
                     <Link href="/">

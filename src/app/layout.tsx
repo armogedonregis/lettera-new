@@ -35,7 +35,7 @@ export default function RootLayout({
       <CartWrapper>
         <LoaderWrapper>
           <Header />
-          <main>
+          <main className="pt-6">
             <CustomScrollbar>
               <div className="container mx-auto">
                 <div className="w-full min-h-screen h-full bg-gradient-to-br from-[#2290FF40] to-[#2290FF40] backdrop-blur-[50.46px]">

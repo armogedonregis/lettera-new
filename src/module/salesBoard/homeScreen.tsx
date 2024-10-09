@@ -146,7 +146,7 @@ export default function HomeScreen() {
     return (
         <div className="pt-[30px] pb-32 flex flex-col h-full min-h-full">
             <SalesBoardHeader />
-            <div className="flex-grow mt-4 px-5 lg:px-[46px] overflow-hidden">
+            <div className="flex-grow mt-16 px-5 lg:px-[46px] overflow-hidden">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {products.map((product) => (
                         <ProductCard key={product.id} product={product} />

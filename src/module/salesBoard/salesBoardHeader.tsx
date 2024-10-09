@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Fragment } from 'react';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import {
@@ -23,6 +23,7 @@ import {
 } from '@heroicons/react/24/solid';
 import React from 'react';
 import CustomScrollbar from '@/components/customScrollbar';
+import { useScrollPosition } from '@/hooks/useScrollPosition';
 
 const categories = {
     "Транспорт": ["Автомобили", "Мотоциклы", "Велосипеды", "Водный транспорт", "Запчасти"],
@@ -63,29 +64,26 @@ const categoryIcons = {
 };
 
 export const SalesBoardHeader = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
+    const scrollPosition = useScrollPosition();
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [isScrolled, setIsScrolled] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pathname = usePathname();
 
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollContainer = document.querySelector('.simplebar-content-wrapper');
-            const offset = scrollContainer ? scrollContainer.scrollTop : 0;
-            if (offset > 20) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
+        // Сбрасываем состояние скролла при изменении маршрута
+        setIsScrolled(false);
+    }, [pathname]);
 
-        const scrollContainer = document.querySelector('.simplebar-content-wrapper');
-        scrollContainer?.addEventListener('scroll', handleScroll);
+    useEffect(() => {
+        // Обновляем состояние скролла с небольшой задержкой
+        const timer = setTimeout(() => {
+            setIsScrolled(scrollPosition > 20);
+        }, 500);
 
-        return () => {
-            scrollContainer?.removeEventListener('scroll', handleScroll);
-        };
-    }, [router]);
+        return () => clearTimeout(timer);
+    }, [scrollPosition]);
 
     const setCategory = (category: string, subcategory?: string) => {
         const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -101,7 +99,7 @@ export const SalesBoardHeader = () => {
     };
 
     return (
-        <div className={`sticky top-0 z-50 px-5 lg:px-8 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md rounded-b-xl pt-5' : ''}`}>
+        <div className={`sticky z-[60] px-5 lg:px-8 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md rounded-b-xl pt-6 top-12' : 'top-20'}`}>
             <div className="flex mb-4">
                 <div className="relative flex-grow">
                     <input type="text" placeholder="Поиск в Lettera" className="w-full p-2 pl-10 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
